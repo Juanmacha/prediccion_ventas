@@ -2,11 +2,16 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 import pandas as pd
+import os
 
-# Cargar modelo y features
-model = joblib.load("modelo.pkl")
-features = joblib.load("features.pkl")
+# Ruta base del proyecto
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Cargar modelo y features con rutas absolutas
+model = joblib.load(os.path.join(BASE_DIR, "modelo.pkl"))
+features = joblib.load(os.path.join(BASE_DIR, "features.pkl"))
+
+# Crear instancia de la API
 app = FastAPI(title="API Predicción de Ventas")
 
 # Definir el esquema de entrada
